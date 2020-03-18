@@ -1,9 +1,11 @@
 const express = require('express');
-const morgan = require('morgan');
 const app = express();
 const PORT = 3000;
 
-app.use(morgan('dev'));
+const gamesRouter = require("./routes/games.js")
+
 app.use(express.json());
+
+app.use("/games", gamesRouter);
 
 app.listen(PORT, () => console.log('server running on ' + PORT));
