@@ -15,8 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         time: DataTypes.STRING,
         age: DataTypes.STRING,
         description: DataTypes.STRING,
-        MechanicId: DataTypes.STRING,
-        TypeId: DataTypes.STRING
     }, {});
     Game.associate = function(models) {
         Game.belongsToMany(models.Mechanic, {

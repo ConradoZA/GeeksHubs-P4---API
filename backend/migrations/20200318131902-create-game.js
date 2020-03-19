@@ -34,12 +34,6 @@ module.exports = {
             description: {
                 type: Sequelize.STRING
             },
-            MechanicId: {
-                type: Sequelize.STRING
-            },
-            TypeId: {
-                type: Sequelize.STRING
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
