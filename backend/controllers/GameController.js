@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Game, Type, Mechanic, MechanicGame, TypeGame, sequelize } = require('../models/index.js')
+const { Game, Type, Mechanic, sequelize } = require('../models/index.js')
 
 const GameController = {
     getAll(req, res) {
@@ -31,6 +31,8 @@ const GameController = {
             .then(game => {
                 game.addType(req.body.TypeId);
                 game.addMechanic(req.body.MechanicId);
+                game.addAuthor(req.body.AuthorId);
+                game.addArtist(req.body.ArtistId);
                 res.send(game);
 
             })
@@ -45,14 +47,15 @@ const GameController = {
             .then(game => {
                 sequelize.query(`DELETE FROM TypeGames where GameId = ${game.id}`);
                 sequelize.query(`DELETE FROM MechanicGames where GameId = ${game.id}`);
+                sequelize.query(`DELETE FROM AuthorGames where GameId = ${game.id}`);
+                sequelize.query(`DELETE FROM ArtistGames where GameId = ${game.id}`);
                 game.addType(req.body.TypeId);
                 game.addMechanic(req.body.MechanicId);
+                game.addAuthor(req.body.AuthorId);
+                game.addArtist(req.body.ArtistId);
                 res.status(200).send(game)
             })
-            .catch(err => {
-                res.status(500).send('Ha habido problemas al tratar de actualizar el juego.'),
-                    console.log(err)
-            })
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar el juego.'))
     },
     delete(req, res) {
         Game.destroy({ where: { id: req.params.id } })

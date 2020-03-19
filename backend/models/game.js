@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         Game.belongsToMany(models.Type, {
             through: models.TypeGame
         });
+        Game.belongsToMany(models.Author, {
+            through: models.AuthorGame
+        });
+        Game.belongsToMany(models.Artist, {
+            through: models.ArtistGame
+        });
     };
     return Game;
 };
