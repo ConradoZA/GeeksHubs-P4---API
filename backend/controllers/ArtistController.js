@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Game, Artist } = require('../models/index.js')
+const { Game, Artist, sequelize } = require('../models/index.js')
 
 const ArtistController = {
     getAll(req, res) {
@@ -40,10 +40,11 @@ const ArtistController = {
             .then(artist => {
                 res.status(200).send(artist)
             })
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar los artistas.'))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar el artista.'))
     },
     delete(req, res) {
         Artist.destroy({ where: { id: req.params.id } })
+            .then(() => sequelize.query(`DELETE FROM ArtistGames where ArtistId = ${req.params.id}`))
             .then(() => res.status(200).send('Artista eliminado.'))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de eliminar el artista.'))
     }

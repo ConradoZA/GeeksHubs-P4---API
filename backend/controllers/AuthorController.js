@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Game, Author } = require('../models/index.js')
+const { Game, Author, sequelize } = require('../models/index.js')
 
 const AuthorController = {
     getAll(req, res) {
@@ -40,10 +40,11 @@ const AuthorController = {
             .then(author => {
                 res.status(200).send(author)
             })
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar los autores.'))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar el autor.'))
     },
     delete(req, res) {
         Author.destroy({ where: { id: req.params.id } })
+            .then(() => sequelize.query(`DELETE FROM AuthorGames where AuthorId = ${req.params.id}`))
             .then(() => res.status(200).send('Autor eliminado.'))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de eliminar el autor.'))
     }

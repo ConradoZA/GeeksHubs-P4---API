@@ -7,6 +7,7 @@ const mechanicsRouter = require("./routes/mechanics.js")
 const typesRouter = require("./routes/types.js")
 const authorsRouter = require("./routes/authors.js")
 const artistsRouter = require("./routes/artists.js")
+const searchesRouter = require("./routes/searches.js")
 
 app.use(express.json());
 
@@ -15,5 +16,6 @@ app.use("/mechanics", mechanicsRouter);
 app.use("/types", typesRouter);
 app.use("/authors", authorsRouter);
 app.use("/artists", artistsRouter);
+app.use("/search", searchesRouter);
 
 app.listen(PORT, () => console.log('server running on ' + PORT));

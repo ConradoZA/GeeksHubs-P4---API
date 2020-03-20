@@ -61,12 +61,18 @@ const GameController = {
                     sequelize.query(`DELETE FROM ArtistGames where GameId = ${game.id}`);
                     game.addArtist(req.body.ArtistId);
                 }
-                res.status(200).send(game)
+                res.send(game)
             })
             .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar el juego.'))
     },
     delete(req, res) {
         Game.destroy({ where: { id: req.params.id } })
+            .then(game => {
+                sequelize.query(`DELETE FROM TypeGames where GameId = ${req.params.id}`);
+                sequelize.query(`DELETE FROM MechanicGames where GameId = ${req.params.id}`);
+                sequelize.query(`DELETE FROM AuthorGames where GameId = ${req.params.id}`);
+                sequelize.query(`DELETE FROM ArtistGames where GameId = ${req.params.id}`);
+            })
             .then(() => res.send('Juego eliminado.'))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de eliminar el juego.'))
     }
