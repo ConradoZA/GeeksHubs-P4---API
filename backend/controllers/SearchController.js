@@ -217,7 +217,11 @@ const SearchController = {
     getByAge(req, res) {
         Game.findAll({
                 include: [Type, Mechanic, Author, Artist],
-                where: { age: req.params.age },
+                where: {
+                    age: {
+                        [Op.gte]: req.params.age
+                    }
+                },
                 order: [
                     ['name', 'ASC'],
                     [models.Type, 'name', 'ASC'],
