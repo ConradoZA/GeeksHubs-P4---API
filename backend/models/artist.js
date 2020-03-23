@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         description: DataTypes.STRING
     }, {});
     Artist.associate = function(models) {
-        Artist.belongsToMany(models.Type, {
+        Artist.belongsToMany(models.Game, {
             through: models.ArtistGame
         });
     };

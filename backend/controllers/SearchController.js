@@ -14,10 +14,10 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -29,10 +29,10 @@ const SearchController = {
                 where: { year: req.params.year },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -55,10 +55,10 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -74,19 +74,7 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
-                ]
-            })
-            .then(mechanics => res.send(mechanics))
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener las mecánicas de juego.'))
-    },
-    getMechanicById(req, res) {
-        Mechanic.findAll({
-                include: [Game],
-                where: { id: req.params.id },
-                order: [
-                    ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
+                    [Game, 'name', 'ASC']
                 ]
             })
             .then(mechanics => res.send(mechanics))
@@ -102,19 +90,7 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
-                ]
-            })
-            .then(types => res.send(types))
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los tipos de juego.'))
-    },
-    getTypeById(req, res) {
-        Type.findAll({
-                include: [Game],
-                where: { id: req.params.id },
-                order: [
-                    ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
+                    [Game, 'name', 'ASC']
                 ]
             })
             .then(types => res.send(types))
@@ -130,19 +106,7 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
-                ]
-            })
-            .then(authors => res.send(authors))
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los autores.'))
-    },
-    getAuthorById(req, res) {
-        Author.findAll({
-                include: [Game],
-                where: { id: req.params.id },
-                order: [
-                    ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
+                    [Game, 'name', 'ASC']
                 ]
             })
             .then(authors => res.send(authors))
@@ -158,19 +122,7 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
-                ]
-            })
-            .then(artists => res.send(artists))
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los artistas.'))
-    },
-    getArtistById(req, res) {
-        Artist.findAll({
-                include: [Game],
-                where: { id: req.params.id },
-                order: [
-                    ['name', 'ASC'],
-                    [models.Game, 'name', 'ASC']
+                    [Game, 'name', 'ASC']
                 ]
             })
             .then(artists => res.send(artists))
@@ -181,15 +133,15 @@ const SearchController = {
                 include: [Type, Mechanic, Author, Artist],
                 where: {
                     time: {
-                        [Op.lte]: req.params.time
+                        [Op.lte]: +req.params.time
                     }
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -200,15 +152,15 @@ const SearchController = {
                 include: [Type, Mechanic, Author, Artist],
                 where: {
                     time: {
-                        [Op.gte]: req.params.time
+                        [Op.gte]: +req.params.time
                     }
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -224,10 +176,10 @@ const SearchController = {
                 },
                 order: [
                     ['name', 'ASC'],
-                    [models.Type, 'name', 'ASC'],
-                    [models.Mechanic, 'name', 'ASC'],
-                    [models.Author, 'name', 'ASC'],
-                    [models.Artist, 'name', 'ASC']
+                    [Type, 'name', 'ASC'],
+                    [Mechanic, 'name', 'ASC'],
+                    [Author, 'name', 'ASC'],
+                    [Artist, 'name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
