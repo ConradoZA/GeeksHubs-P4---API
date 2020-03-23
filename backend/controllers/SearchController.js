@@ -45,11 +45,11 @@ const SearchController = {
                 where: {
                     [Op.and]: [{
                         maxPlayer: {
-                            [Op.gte]: req.params.player
+                            [Op.gte]: +req.params.player
                         }
                     }, {
                         minPlayer: {
-                            [Op.lte]: req.params.player
+                            [Op.lte]: +req.params.player
                         }
                     }]
                 },
@@ -171,7 +171,7 @@ const SearchController = {
                 include: [Type, Mechanic, Author, Artist],
                 where: {
                     age: {
-                        [Op.gte]: req.params.age
+                        [Op.lte]: +req.params.age
                     }
                 },
                 order: [
